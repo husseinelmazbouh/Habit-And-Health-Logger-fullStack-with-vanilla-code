@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Health Logger - Admin Panel</title>
+<link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+<div class="page-wrapper">
+    <header>
+    <div>
+        <h1>Admin Panel</h1>
+        <div class="subtitle">
+        Logged in as <span id="admin-email"></span> (admin)
+        </div>
+    </div>
+</header>
+    <div class="main-layout">
+    <section class="card">
+        <h3>Users</h3>
+        <table class="table">
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Created at</th>
+            </tr>
+        </thead>
+        <tbody id="users-table-body">
+            <tr><td colspan="4">Loading...</td></tr>
+</tbody>
+        </table>
+    </section>
+    </div>
+</div>
+<div>
+        <button id="logout-btn" class="btn btn-ghost">Log out</button>
+    </div>
+<script src="../scrips/axios.min.js"></script>
+<script src="../scripts/api.js"></script> 
+<script src="../scripts/admin.js"></script>
+</body>
+</html>
