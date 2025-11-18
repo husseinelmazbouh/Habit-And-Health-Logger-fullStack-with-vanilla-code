@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+
+<div class="box">
+    <h2>Your Habits</h2>
+
+    <input id="habitName" placeholder="New Habit Name">
+    <button onclick="addHabit()">Add Habit</button>
+
+    <h3>Habit List</h3>
+    <ul id="habitList"></ul>
+
+    <h3>Entries</h3>
+    <textarea id="entryText" placeholder="Write your entry…"></textarea>
+    <button onclick="addEntry()">Save Entry</button>
+
+    <h3>Your Chart</h3>
+    <canvas id="chart"></canvas>
+
+    <button class="logout" onclick="logout()">Logout</button>
+</div>
+
+<script src="../scripts/app.js"></script>
+<script src="../scrips/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
