@@ -59,3 +59,23 @@ function logout() {
 }
 
 loadHabits();
+
+async function askAI() {
+    const text = document.getElementById("aiInput").value;
+
+    if (!text.trim()) {
+        alert("Please enter text.");
+        return;
+    }
+
+    try {
+        const res = await axios.post(`${BASE_URL}/ai/parse`, {
+            text
+        });
+
+        document.getElementById("aiResponse").innerText = res.data.response;
+
+    } catch (err) {
+        document.getElementById("aiResponse").innerText = "Error processing AI request.";
+    }
+}

@@ -19,6 +19,14 @@
     <textarea id="entryText" placeholder="Write your entry…"></textarea>
     <button onclick="addEntry()">Save Entry</button>
 
+    <h3>AI Assistant</h3>
+
+<textarea id="aiInput" placeholder="Write anything..."></textarea>
+<button onclick="askAI()">Ask AI</button>
+
+<h4>AI Response</h4>
+<div id="aiResponse" class="ai-box">No response yet.</div>
+
     <h3>Your Chart</h3>
     <canvas id="chart"></canvas>
 
@@ -26,6 +34,7 @@
 </div>
 
 <script src="../scripts/app.js"></script>
+<script src="../scripts/api.js"></script> 
 <script src="../scrips/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>

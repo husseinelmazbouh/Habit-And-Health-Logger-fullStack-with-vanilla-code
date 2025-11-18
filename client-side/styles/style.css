@@ -16,7 +16,14 @@ input, textarea {
     padding: 10px;
     margin: 6px ;
 }
-
+.ai-box {
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    min-height: 40px;
+}
 button {
     width: 100%;
     padding: 10px;
