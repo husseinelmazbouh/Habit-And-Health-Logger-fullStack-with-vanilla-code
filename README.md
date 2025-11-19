@@ -13,21 +13,14 @@ The app allows users to:
 -Display charts (from backend API) <br>
 -admin user <br>
 <hr>
-## Technologies Used
-<h2>Frontend</h2>
-HTML
-CSS (simple, clean style)
-JavaScript
-Axios
-
+<h2> Technologies Used</h2>
+<h3>Frontend</h3>
+HTML , CSS (simple, clean style) , JavaScript , Axios
 <h2>Backend</h2>
 PHP 
-MySQL Database
-Local server (XAMPP )
-Returns JSON responses
-Provides charts data (API)
+MySQL Database , Local server (XAMPP ) , Returns JSON responses , Provides charts data (API)
 <hr>
-5. App Features
+<h3>App Features</h3>
 <h3>Authentication</h3>
 Sign up
 Log in
@@ -43,13 +36,11 @@ Add habit values
 Edit previous entries
 View history
 <h3>Admin View</h3>
-login as admin
-view users
-delete users
+login as admin , view users , delete users
 <hr>
-#admin info
-user : husseinelmazbouh@test.com
-password : hussein123
+<h2>admin info</h2>
+admin : husseinelmazbouh@test.com <br>
+password : hussein123 <br>
 
 You can chage it from going to server-side/migration/001_create_user_table.php and change the user and password from thier
 <hr>
