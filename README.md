@@ -5,15 +5,15 @@ It connects to a PHP backend (local server: XAMPP/Laragon) using Axios for all H
 
 The app allows users to:
 
--Sign up
--Log in
--Create habits
--Add daily entries
--View, edit, and delete habits
--Display charts (from backend API)
--admin user
+-Sign up <br>
+-Log in <br>
+-Create habits <br>
+-Add daily entries <br>
+-View, edit, and delete habits <br>
+-Display charts (from backend API) <br>
+-admin user <br>
 <hr>
-# Technologies Used
+## Technologies Used
 <h2>Frontend</h2>
 HTML
 CSS (simple, clean style)
@@ -57,5 +57,8 @@ You can chage it from going to server-side/migration/001_create_user_table.php a
 So is this way you create the database and finally everything work correctly
 <hr>
 <h3>Made By</h3>
-Hussein El Mazbouh
+Hussein El Mazbouh <br>
+Email: husseinelmazbouh6@gmail.com<br>
+Portfolio: https://husseinelmazbouh.github.io/portfolio1/ <br>
+GitHub: https://github.com/husseinelmazbouh <br>
 2025
