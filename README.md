@@ -1,1 +1,61 @@
 # Habit-And-Health-Logger-fullStack-with-vanilla-code
+
+This project is a simple Habit & Health Tracking Application built using HTML, CSS, and Vanilla JavaScript.
+It connects to a PHP backend (local server: XAMPP/Laragon) using Axios for all HTTP requests.
+
+The app allows users to:
+
+-Sign up
+-Log in
+-Create habits
+-Add daily entries
+-View, edit, and delete habits
+-Display charts (from backend API)
+-admin user
+<hr>
+# Technologies Used
+<h2>Frontend</h2>
+HTML
+CSS (simple, clean style)
+JavaScript
+Axios
+
+<h2>Backend</h2>
+PHP 
+MySQL Database
+Local server (XAMPP )
+Returns JSON responses
+Provides charts data (API)
+<hr>
+5. App Features
+<h3>Authentication</h3>
+Sign up
+Log in
+Stores token in localStorage
+
+<h3>Habits</h3>
+Create a new habit
+Display list dynamically
+
+<h3>Daily Entries</h3>
+Add daily log text
+Add habit values
+Edit previous entries
+View history
+<h3>Admin View</h3>
+login as admin
+view users
+delete users
+<hr>
+#admin info
+user : husseinelmazbouh@test.com
+password : hussein123
+
+You can chage it from going to server-side/migration/001_create_user_table.php and change the user and password from thier
+<hr>
+<b>note</b>: you must create a "health_logger" database in XAMPP and then launch the everyfile in migration 
+So is this way you create the database and finally everything work correctly
+<hr>
+<h3>Made By</h3>
+Hussein El Mazbouh
+2025
