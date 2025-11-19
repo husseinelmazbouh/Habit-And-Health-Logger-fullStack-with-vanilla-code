@@ -10,60 +10,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit(0);
 }
 
-$base_path = dirname($_SERVER['SCRIPT_NAME']);
-$request_uri = $_SERVER['REQUEST_URI'];
-
-
-if ($base_path !== '/' && strpos($request_uri, $base_path) === 0) {
-    $request_uri = substr($request_uri, strlen($base_path));
-}
+$request_uri = $_SERVER['REQUEST_URI']; 
+$script_name = $_SERVER['SCRIPT_NAME']; 
+$script_dir = dirname($script_name);
 
 $path = parse_url($request_uri, PHP_URL_PATH);
 
-$path = rtrim($path, '/');
-if (empty($path)) {
-    $path = '/';
+if (strpos($path, $script_dir) === 0) {
+    $path = substr($path, strlen($script_dir));
 }
 
+if (strpos($path, '/index.php') === 0) {
+    $path = substr($path, 10);
+}
+
+$path = '/' . ltrim($path, '/');
+$path = rtrim($path, '/');
+
+if (empty($path) || $path === '/') {
+    echo ResponseService::response(200, "API is running!");
+    exit;
+}
 
 if (isset($apis[$path])) {
     $route = $apis[$path];
-    
-    if (!isset($route['controller']) || !isset($route['method'])) {
-        echo ResponseService::response(500, "Invalid route configuration for: $path");
-        exit;
-    }
-    
     $controller_name = $route['controller'];
     $method = $route['method'];
-    
     $controller_file = __DIR__ . "/controllers/{$controller_name}.php";
-    
-    if (!file_exists($controller_file)) {
-        echo ResponseService::response(500, "Controller file not found: {$controller_name}.php");
-        exit;
+
+    if (file_exists($controller_file)) {
+        require_once $controller_file;
+        $controller = new $controller_name();
+        $controller->$method();
+    } else {
+        echo ResponseService::response(500, "Controller file missing: $controller_name");
     }
-    
-    require_once $controller_file;
-    
-    if (!class_exists($controller_name)) {
-        echo ResponseService::response(500, "Controller class not found: {$controller_name}");
-        exit;
-    }
-    
-    $controller = new $controller_name();
-    
-    if (!method_exists($controller, $method)) {
-        echo ResponseService::response(500, "Method not found: {$controller_name}::{$method}()");
-        exit;
-    }
-    
-    $controller->$method();
 } else {
     echo ResponseService::response(404, [
         "message" => "Route Not Found",
         "requested_path" => $path,
-        "available_routes" => array_keys($apis)
+        "base_url_hint" => "Make sure your JS BASE_URL points to index.php"
     ]);
 }
 ?>

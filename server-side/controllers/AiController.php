@@ -18,22 +18,5 @@ class AIController {
         $structured_data = parseFreeTextWithAI($input['free_text']);
         echo ResponseService::response(200, $structured_data);
     }
-
-    function weeklySummary() {
-        $user_id = AuthMiddleware::authenticate();
-        if (!$user_id) return;
-
-        $summary = generateWeeklySummary($user_id);
-        echo ResponseService::response(200, $summary);
-    }
-
-    function nutritionAdvice() {
-        $user_id = AuthMiddleware::authenticate();
-        if (!$user_id) return;
-
-        $input = json_decode(file_get_contents('php://input'), true);
-        $advice = getNutritionAdvice($input['user_data'] ?? '');
-        echo ResponseService::response(200, ["advice" => $advice]);
-    }
-}
+} 
 ?>
