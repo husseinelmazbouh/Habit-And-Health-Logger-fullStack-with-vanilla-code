@@ -20,6 +20,7 @@ class EntryController {
     }
 
     function createEntry() {
+        
         $user_id = AuthMiddleware::authenticate();
         if (!$user_id) return;
 

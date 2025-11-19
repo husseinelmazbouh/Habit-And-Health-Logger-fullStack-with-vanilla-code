@@ -5,7 +5,9 @@ require_once(__DIR__ . "/../services/ResponseService.php");
 require_once(__DIR__ . "/../services/UserService.php");
 
 class UserController {
+    
     function register() {
+        global $connection;
         $input = json_decode(file_get_contents('php://input'), true);
         $result = createUser_serv($input);
         echo ResponseService::response(200, $result);
