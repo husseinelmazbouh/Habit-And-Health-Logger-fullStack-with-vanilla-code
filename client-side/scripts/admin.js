@@ -1,119 +1,64 @@
-const BASE_URL = "http://localhost/Habit-And-Health-Logger-fullStack-with-vanilla-code/routes/apis";
+const BASE_URL = "http://localhost/Habit-And-Health-Logger-fullStack-with-vanilla-code/server-side/index.php";
 const token = localStorage.getItem("token");
 
-if (!token) window.location.href = "login.html";
+if (!token) window.location.href = "../pages/login.html";
 
-axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+axios.defaults.headers.common["Authorization"] = token;
 
 async function loadUsers() {
     try {
         const res = await axios.get(`${BASE_URL}/users`);
-        const users = res.data;
+        const users = res.data.data; 
+        
+        const tableBody = document.getElementById("users-table-body");
+        tableBody.innerHTML = ""; 
 
-        const list = document.getElementById("userList");
-        list.innerHTML = "";
-
-        users.forEach(u => {
-            const li = document.createElement("li");
-            li.innerHTML = `
-                <strong>${u.name}</strong> (${u.email})
-                <button onclick="viewUser(${u.id})">View</button>
-                <button onclick="disableUser(${u.id})">Disable</button>
-                <button onclick="deleteUser(${u.id})" style="background:red">Delete</button>
-            `;
-            list.appendChild(li);
-        });
-
-    } catch (err) {
-        alert("Error loading users.");
-    }
-}
-
-async function viewUser(id) {
-    document.getElementById("selectedUserId").innerText = id;
-
-    await loadUserHabits(id);
-    await loadUserEntries(id);
-}
-
-async function loadUserHabits(userId) {
-    try {
-        const res = await axios.get(`${BASE_URL}/habits`);
-        const list = document.getElementById("habitList");
-
-        list.innerHTML = "";
-
-        res.data.forEach(h => {
-            const li = document.createElement("li");
-            li.textContent = h.name;
-            list.appendChild(li);
-        });
+        if (Array.isArray(users)) {
+            users.forEach(u => {
+                const tr = document.createElement("tr");
+                
+                tr.innerHTML = `
+                    <td>${u.id}</td>
+                    <td>${u.email}</td>
+                    <td>
+                        <span style="padding:4px 8px; background:${u.role === 'admin' ? '#d1ecf1' : '#eee'}; border-radius:4px;">
+                            ${u.role}
+                        </span>
+                    </td>
+                    <td>${u.created_at}</td>
+                    <td>
+                        <button onclick="deleteUser(${u.id})" style="background:#dc3545; width:auto; padding:5px 10px; font-size:12px;">
+                            Delete
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        } else {
+            tableBody.innerHTML = "<tr><td colspan='5'>No users found.</td></tr>";
+        }
 
     } catch (err) {
-        alert("Cannot load habits.");
-    }
-}
-
-async function loadUserEntries(userId) {
-    try {
-        const res = await axios.get(`${BASE_URL}/entries`);
-
-        const list = document.getElementById("entryList");
-        list.innerHTML = "";
-
-        const labels = [];
-        const values = [];
-
-        res.data.forEach(e => {
-            const li = document.createElement("li");
-            li.textContent = `${e.date}: ${e.text}`;
-            list.appendChild(li);
-
-            labels.push(e.date);
-            values.push(e.score);
-        });
-
-        buildChart(labels, values);
-
-    } catch (err) {
-        alert("Cannot load entries.");
+        console.error(err);
+        alert("Error loading users. Are you an admin?");
     }
 }
 
 async function deleteUser(id) {
-    if (!confirm("Delete user?")) return;
+    if (!confirm("Are you sure you want to delete this user?")) return;
 
     try {
-        await axios.post(`${BASE_URL}/users/delete`, { id });
-        alert("User deleted.");
-        loadUsers();
-
+        await axios.get(`${BASE_URL}/users/delete?id=${id}`);
+        loadUsers(); 
     } catch (err) {
         alert("Failed deleting user.");
     }
 }
 
-let chart;
-
-function buildChart(labels, values) {
-    const ctx = document.getElementById("adminChart");
-
-    if (chart) chart.destroy();
-
-    chart = new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels,
-            datasets: [{
-                label: "User Activity",
-                data: values
-            }]
-        }
-    });
-}
 function logout() {
     localStorage.clear();
     window.location.href = "../pages/login.html";
 }
 
+// Initialize
 loadUsers();
