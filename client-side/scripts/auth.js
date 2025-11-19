@@ -1,24 +1,24 @@
-const BASE_URL = "http://localhost/Habit-And-Health-Logger-fullStack-with-vanilla-code/routes/apis";
+const BASE_URL = "http://localhost/Habit-And-Health-Logger-fullStack-with-vanilla-code/server-side/index.php";
 
 async function register() {
-    const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
+    if(!email || !password) return alert("Please fill all fields :)");
+
     try {
         await axios.post(`${BASE_URL}/register`, {
-            name,
             email,
             password
         });
-
-        alert("Registered successfully! :) :)");
-        window.location.href = "../pages/login.html";
-
+        alert("Registered successfully! :)");
+        window.location.href = "login.html";
     } catch (err) {
-        alert("Registration failed :(");
+        console.error(err);
+        alert("Registration failed (Email might exist).");
     }
 }
+
 async function login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -28,12 +28,23 @@ async function login() {
             email,
             password
         });
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
 
-        window.location.href = "../pages/dashboard.html";
-    } 
-    catch (err) {
-        alert("Login failed :(");
+        const responseData = res.data.data; 
+
+        if (responseData.token) {
+            localStorage.setItem("token", responseData.token);
+            localStorage.setItem("user", JSON.stringify(responseData.user));
+            
+            if(responseData.user.role === 'admin'){
+                window.location.href = "admin.html";
+            } else {
+                window.location.href = "dashboard.html";
+            }
+        } else {
+            alert("Login failed :(");
+        }
+    } catch (err) {
+        console.error(err);
+        alert("Login failed. Check credentials. ;)");
     }
 }

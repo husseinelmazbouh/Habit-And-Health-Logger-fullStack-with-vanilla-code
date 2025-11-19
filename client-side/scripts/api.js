@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost/Habit-And-Health-Logger-fullStack-with-vanilla-code/routes/apis'; 
+const BASE_URL = "http://localhost/Habit-And-Health-Logger-fullStack-with-vanilla-code/server-side/routes";
 
 axios.defaults.baseURL = API_BASE_URL;
 

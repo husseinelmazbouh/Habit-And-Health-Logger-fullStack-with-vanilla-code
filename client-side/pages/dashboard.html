@@ -6,36 +6,45 @@
 </head>
 <body>
 
-<div class="box">
-    <h2>Your Habits</h2>
+    <div id="header2">
+        <h2>Habit Dashboard And Logger</h2>
+        <button class="header-logout" onclick="logout()" style="background-color:  #c9302c;">Logout</button>
+    </div>
 
-    <input id="habitName" placeholder="New Habit Name">
-    <button onclick="addHabit()">Add Habit</button>
+    <div class="wide-box">
+        <h2>Your Habits</h2>
 
-    <h3>Habit List</h3>
-    <ul id="habitList"></ul>
+        <div id=habitsAdd >
+            <input id="habitName" placeholder="New Habit Name">
+            <button onclick="addHabit()" >Add Habit</button>
+        </div>
 
-    <h3>Entries</h3>
-    <textarea id="entryText" placeholder="Write your entry…"></textarea>
-    <button onclick="addEntry()">Save Entry</button>
+        <h3>Habit List</h3>
+        <ul id="habitList"></ul>
 
-    <h3>AI Assistant</h3>
+        <hr>
 
-<textarea id="aiInput" placeholder="Write anything..."></textarea>
-<button onclick="askAI()">Ask AI</button>
+        <h3>Daily Entry</h3>
+        <textarea id="entryText" rows="3" placeholder="Write your entry..."></textarea>
+        <button onclick="addEntry()">Save Entry</button>
 
-<h4>AI Response</h4>
-<div id="aiResponse" class="ai-box">No response yet.</div>
+        <hr>
 
-    <h3>Your Chart</h3>
-    <canvas id="chart"></canvas>
+        <h3>AI Assistant (Log Parser)</h3>
+        <p  class="p-holder">Type something like: "I walked 5000 steps and slept 8 hours"</p>
+        <textarea id="aiInput" rows="2" placeholder="Write here..."></textarea>
+        <button onclick="askAI()">Parse with AI</button>
 
-    <button class="logout" onclick="logout()">Logout</button>
-</div>
+        <h4>AI Output (JSON)</h4>
+        <div id="aiResponse" class="ai-box">No response yet.</div>
 
-<script src="../scripts/app.js"></script>
-<script src="../scripts/api.js"></script> 
-<script src="../scrips/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <h3>Your Activity Chart</h3>
+        <canvas id="chart"></canvas>
+    </div>
+
+    <script src="../scripts/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../scripts/app.js"></script>
+
 </body>
 </html>
