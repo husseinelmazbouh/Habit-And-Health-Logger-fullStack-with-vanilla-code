@@ -49,7 +49,7 @@ So is this way you create the database and finally everything work correctly
 <hr>
 <h3>Made By</h3>
 Hussein El Mazbouh <br>
-Email: husseinelmazbouh6@gmail.com<br>
+Email: husseinelmazbouh1@gmail.com<br>
 Portfolio: https://husseinelmazbouh.github.io/portfolio1/ <br>
 GitHub: https://github.com/husseinelmazbouh <br>
 2025
