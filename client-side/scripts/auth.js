@@ -15,7 +15,7 @@ async function register() {
         window.location.href = "login.html";
     } catch (err) {
         console.error(err);
-        alert("Registration failed (Email might exist).");
+        alert("Registration failed");
     }
 }
 
