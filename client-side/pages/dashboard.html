@@ -14,7 +14,7 @@
     <div class="wide-box">
         <h2>Your Habits</h2>
 
-        <div id=habitsAdd >
+        <div id="habitsAdd">
             <input id="habitName" placeholder="New Habit Name">
             <button onclick="addHabit()" >Add Habit</button>
         </div>
@@ -39,11 +39,13 @@
         <div id="aiResponse" class="ai-box">No response yet.</div>
 
         <h3>Your Activity Chart</h3>
+        <button class="refresh-btn" onclick="loadChart()">Refresh Data</button>
         <canvas id="chart"></canvas>
+
     </div>
 
     <script src="../scripts/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../scripts/chart.js"></script>
     <script src="../scripts/app.js"></script>
 
 </body>

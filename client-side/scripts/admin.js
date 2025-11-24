@@ -59,6 +59,4 @@ function logout() {
     localStorage.clear();
     window.location.href = "../pages/login.html";
 }
-
-// Initialize
 loadUsers();

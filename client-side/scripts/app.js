@@ -41,7 +41,6 @@ async function addEntry() {
     if (!text) return alert("Enter text");
     
     const today = new Date().toISOString().split('T')[0];
-
     try {
         await axios.post(`${BASE_URL}/entries/create`, {
             free_text: text,
@@ -66,9 +65,50 @@ async function askAI() {
         document.getElementById("aiResponse").innerText = "AI Error.";
     }
 }
+let myChart = null; 
+
+async function loadChart() {
+    try {
+        const res = await axios.get(`${BASE_URL}/entries`);
+        const entries = res.data.data;
+        if (!Array.isArray(entries) || entries.length === 0) {
+            console.log("No data for chart yet.");
+            return;
+        }
+        const labels = entries.map(e => e.entry_date);
+        const data = entries.map(e => e.free_text ? e.free_text.length : 0);
+        const ctx = document.getElementById('chart');
+        if (myChart) {
+            myChart.destroy();
+        }
+        myChart = new Chart(ctx, {
+            type: 'bar', 
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Activity Level (Text Length)',
+                    data: data,
+                    backgroundColor: '#3a7bd5',
+                    borderColor: '#247aca',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    } catch (err) {
+        console.error("Chart Error:", err);
+    }
+}
 
 function logout() {
     localStorage.clear();
     window.location.href = "../pages/login.html";
 }
 loadHabits();
+loadChart();
