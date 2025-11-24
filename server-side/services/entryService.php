@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "/../models/Entry.php");
+require_once(__DIR__ . "/../models/entry.php");
 require_once(__DIR__ . "/../connection/connection.php");
 
 function getEntryById_serv($id, $user_id = null) {

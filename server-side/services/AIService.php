@@ -4,12 +4,24 @@ require_once(__DIR__ . "/../connection/connection.php");
 function parseFreeTextWithAI($free_text) {
     $api_key = "";
     
-    $prompt = "Parse this health log into structured JSON. Extract: sleep_hours, steps, exercise_minutes, caffeine_units, water_glasses, mood (1-10). Return ONLY valid JSON: 
-    {\"sleep_hours\": number, \"steps\": number, \"exercise_minutes\": number, \"caffeine_units\": number, \"water_glasses\": number, \"mood\": number}
+    $prompt = "Analyze this health log.
+    1. Extract structured data: sleep_hours, steps, exercise_minutes, caffeine_units, water_glasses, mood (1-10).
+    2. Based on the input, provide a short, helpful 1-sentence 'feedback' on how to improve (e.g., 'Try to sleep more', 'Great job on steps', 'Drink more water').
+
+    Return ONLY valid JSON with this exact structure: 
+    {
+        \"sleep_hours\": number or null, 
+        \"steps\": number or null, 
+        \"exercise_minutes\": number or null, 
+        \"caffeine_units\": number or null, 
+        \"water_glasses\": number or null, 
+        \"mood\": number or null,
+        \"feedback\": \"string\"
+    }
     
     Text: \"$free_text\"
     
-    If any field is not mentioned, set it to null.";
+    If any numeric field is not mentioned in the text, set it to null.";
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, "https://api.openai.com/v1/chat/completions");

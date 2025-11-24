@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "/../models/Habit.php");
+require_once(__DIR__ . "/../models/habit.php");
 require_once(__DIR__ . "/../connection/connection.php");
 
 function getHabitById_serv($id, $user_id = null) {

@@ -3,6 +3,7 @@ require_once(__DIR__ . "/../models/User.php");
 require_once(__DIR__ . "/../connection/connection.php");
 require_once(__DIR__ . "/../services/ResponseService.php");
 require_once(__DIR__ . "/../services/UserService.php");
+require_once(__DIR__ . "/../middleware/AdminMiddleware.php");
 
 class UserController {
     
@@ -25,7 +26,7 @@ class UserController {
     }
 
     function getUsers() {
-        require_once(__DIR__ . "/../middleware/AdminMiddleware.php");
+       
         if (!AdminMiddleware::checkAdmin()) return;
 
         $result = getUserById_serv(null);
@@ -33,7 +34,6 @@ class UserController {
     }
 
     function updateUser() {
-        require_once(__DIR__ . "/../middleware/AdminMiddleware.php");
         if (!AdminMiddleware::checkAdmin()) return;
 
         if (!isset($_GET["id"])) {
@@ -48,7 +48,6 @@ class UserController {
     }
 
     function deleteUser() {
-        require_once(__DIR__ . "/../middleware/AdminMiddleware.php");
         if (!AdminMiddleware::checkAdmin()) return;
 
         if (!isset($_GET["id"])) {
